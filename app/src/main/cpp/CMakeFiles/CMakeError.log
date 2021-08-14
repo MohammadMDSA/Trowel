@@ -1,0 +1,71 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: C:/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Microsoft/AndroidNDK/android-ndk-r21e cmTC_a5b91.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && Access is denied
+Generator: execution of make failed. Make command was: C:/Microsoft/AndroidNDK/android-ndk-r21e cmTC_a5b91.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && 
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: C:/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Microsoft/AndroidNDK/android-ndk-r21e cmTC_0c415.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && Access is denied
+Generator: execution of make failed. Make command was: C:/Microsoft/AndroidNDK/android-ndk-r21e cmTC_0c415.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && 
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_05a3c/fast && /usr/bin/make -f CMakeFiles/cmTC_05a3c.dir/build.make CMakeFiles/cmTC_05a3c.dir/build
+make[1]: Entering directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_05a3c.dir/testCCompiler.c.o
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE   -o CMakeFiles/cmTC_05a3c.dir/testCCompiler.c.o   -c /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp/testCCompiler.c
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang: error while loading shared libraries: libc++.so.1: cannot open shared object file: No such file or directory
+make[1]: *** [CMakeFiles/cmTC_05a3c.dir/build.make:66: CMakeFiles/cmTC_05a3c.dir/testCCompiler.c.o] Error 127
+make[1]: Leaving directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_05a3c/fast] Error 2
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d9000/fast && /usr/bin/make -f CMakeFiles/cmTC_d9000.dir/build.make CMakeFiles/cmTC_d9000.dir/build
+make[1]: Entering directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d9000.dir/testCCompiler.c.o
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE   -o CMakeFiles/cmTC_d9000.dir/testCCompiler.c.o   -c /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp/testCCompiler.c
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang: error while loading shared libraries: libc++.so.1: cannot open shared object file: No such file or directory
+make[1]: *** [CMakeFiles/cmTC_d9000.dir/build.make:66: CMakeFiles/cmTC_d9000.dir/testCCompiler.c.o] Error 127
+make[1]: Leaving directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_d9000/fast] Error 2
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a0b8f/fast && /usr/bin/make -f CMakeFiles/cmTC_a0b8f.dir/build.make CMakeFiles/cmTC_a0b8f.dir/build
+make[1]: Entering directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a0b8f.dir/testCCompiler.c.o
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE   -o CMakeFiles/cmTC_a0b8f.dir/testCCompiler.c.o   -c /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp/testCCompiler.c
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang: error while loading shared libraries: libc++.so.1: cannot open shared object file: No such file or directory
+make[1]: *** [CMakeFiles/cmTC_a0b8f.dir/build.make:66: CMakeFiles/cmTC_a0b8f.dir/testCCompiler.c.o] Error 127
+make[1]: Leaving directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_a0b8f/fast] Error 2
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_61855/fast && /usr/bin/make -f CMakeFiles/cmTC_61855.dir/build.make CMakeFiles/cmTC_61855.dir/build
+make[1]: Entering directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_61855.dir/testCCompiler.c.o
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android21 --gcc-toolchain=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE   -o CMakeFiles/cmTC_61855.dir/testCCompiler.c.o   -c /mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp/testCCompiler.c
+/var/lib/ndks/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang: error while loading shared libraries: libc++.so.1: cannot open shared object file: No such file or directory
+make[1]: *** [CMakeFiles/cmTC_61855.dir/build.make:66: CMakeFiles/cmTC_61855.dir/testCCompiler.c.o] Error 127
+make[1]: Leaving directory '/mnt/c/Users/PCMD/PycharmProjects/openMVG/src/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_61855/fast] Error 2
+
+
+
