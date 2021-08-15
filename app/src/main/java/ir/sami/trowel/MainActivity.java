@@ -135,5 +135,21 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(imageList(images.getAbsolutePath(), sensorDatabase.getAbsolutePath(), matchesDir.getAbsolutePath()));
     }
 
+    public void computeFeatures(View view) {
+        File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");
+        File matchesDir = new File(trowelRoot, "matches");
+        File matchesFile = new File(matchesDir, "sfm_data.json");
+        File featuresDir = new File(trowelRoot, "features");
+        if(!featuresDir.exists())
+            featuresDir.mkdirs();
+
+        TextView tv = binding.sampleText;
+
+        tv.setText(computeFeatures(matchesFile.getAbsolutePath(), featuresDir.getAbsolutePath(), "0", "SIFT", "NORMAL"));
+
+        Snackbar.make(layout, "DONE!", Snackbar.LENGTH_SHORT).show();
+    }
+
     public native String imageList(String sImageDir, String sfileDatabase, String sOutputDir);
+    public native String computeFeatures(String jsSfM_Data_Filename, String jsOutDir, String jbUpRight, String jsImage_Describer_Method, String jsFeaturePreset);
 }

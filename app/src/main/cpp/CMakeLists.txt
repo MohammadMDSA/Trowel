@@ -36,7 +36,7 @@ option(OpenMVG_BUILD_TESTS "Build OpenMVG tests" OFF)
 option(OpenMVG_BUILD_DOC "Build OpenMVG documentation" OFF)
 option(OpenMVG_BUILD_EXAMPLES "Build OpenMVG samples applications." OFF)
 option(OpenMVG_BUILD_OPENGL_EXAMPLES "Build OpenMVG openGL examples" OFF)
-option(OpenMVG_BUILD_SOFTWARES "Build OpenMVG softwares" ON)
+option(OpenMVG_BUILD_SOFTWARES "Build OpenMVG softwares" OFF)
 option(OpenMVG_BUILD_GUI_SOFTWARES "Build OpenMVG GUI softwares (QT5)" OFF)
 option(OpenMVG_BUILD_COVERAGE "Enable code coverage generation (gcc only)" OFF)
 option(OpenMVG_USE_OPENMP "Enable OpenMP parallelization" OFF)
@@ -610,7 +610,8 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ImageList.cpp)
+        ImageList.cpp
+        ComputeFeatures.cpp)
 
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -635,8 +636,10 @@ target_link_libraries( # Specifies the target library.
         openMVG_system
         openMVG_image
         openMVG_features
+        openMVG_multiview
         openMVG_sfm
         openMVG_exif
+        vlsift
         ${STLPLUS_LIBRARY}
         # Links the target library to the log library
         # included in the NDK.
