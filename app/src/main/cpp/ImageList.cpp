@@ -125,7 +125,8 @@ std::pair<bool, Vec3> checkPriorWeightsString
 extern "C" JNIEXPORT jstring JNICALL
 Java_ir_sami_trowel_MainActivity_imageList(
         JNIEnv *env,
-        jobject /* this */, jstring sImageDirS, jstring sfileDatabaseS, jstring sOutputDirS) {
+        jobject obj, jstring sImageDirS, jstring sfileDatabaseS, jstring sOutputDirS,
+        jstring jfocal_pixels) {
 
     std::string failRes = "1";
     jboolean copy = true;
@@ -142,7 +143,7 @@ Java_ir_sami_trowel_MainActivity_imageList(
 
     int i_GPS_XYZ_method = 0;
 
-    double focal_pixels = -1.0;
+    double focal_pixels = std::stod(env->GetStringUTFChars(jfocal_pixels, &copy));
 
     // Expected properties for each image
     double width = -1, height = -1, focal = -1, ppx = -1, ppy = -1;
@@ -228,6 +229,10 @@ Java_ir_sami_trowel_MainActivity_imageList(
         if (!openMVG::image::ReadImageHeader(sImageFilename.c_str(), &imgHeader))
             continue; // image cannot be read
 
+//        width = exifReader->getWidth();
+//        height = exifReader->getHeight();
+//        width = std::stod(env->GetStringUTFChars(jwidth, &copy));
+//        height = std::stod(env->GetStringUTFChars(jheight, &copy));
         width = imgHeader.width;
         height = imgHeader.height;
         ppx = width / 2.0;
@@ -245,6 +250,7 @@ Java_ir_sami_trowel_MainActivity_imageList(
 
         // If not manually provided or wrongly provided
         if (focal == -1) {
+
             std::unique_ptr<Exif_IO> exifReader(new Exif_IO_EasyExif);
             exifReader->open(sImageFilename);
 

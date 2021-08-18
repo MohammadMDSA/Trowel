@@ -418,9 +418,9 @@ if (OpenMVG_BUILD_EXAMPLES)
 endif (OpenMVG_BUILD_EXAMPLES)
 
 # Complete software(s) build on openMVG libraries
-if (OpenMVG_BUILD_SOFTWARES)
-    add_subdirectory(software)
-endif (OpenMVG_BUILD_SOFTWARES)
+#if (OpenMVG_BUILD_SOFTWARES)
+#    add_subdirectory(software)
+#endif (OpenMVG_BUILD_SOFTWARES)
 
 # Included for research purpose only
 add_subdirectory(nonFree)
@@ -610,8 +610,14 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
+        ComputeFeatures.cpp
         ImageList.cpp
-        ComputeFeatures.cpp)
+        ComputeMatches.cpp
+        IncrementalReconstruction.cpp
+        ComputeColors.cpp
+        RefinePoses.cpp
+        SfMIOHelper.hpp
+        SfMPlyHelper.hpp)
 
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -639,9 +645,15 @@ target_link_libraries( # Specifies the target library.
         openMVG_multiview
         openMVG_sfm
         openMVG_exif
+        openMVG_graph
+        openMVG_matching_image_collection
         vlsift
         ${STLPLUS_LIBRARY}
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
         )
+
+target_include_directories(openMVG
+        PRIVATE
+        ${CERES_INCLUDE_DIRS})
