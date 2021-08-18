@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_camera.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_project_detail.xml" value="0.20625" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_project_list.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/fragment_file_chooser.xml" value="0.10030395136778116" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/project_detail_list_item.xml" value="0.20625" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/project_list_item.xml" value="0.20625" />
       </map>
     </option>
   </component>
