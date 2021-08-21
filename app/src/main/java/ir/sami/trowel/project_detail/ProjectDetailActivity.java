@@ -1,12 +1,18 @@
 package ir.sami.trowel.project_detail;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.io.File;
@@ -15,42 +21,72 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ir.sami.trowel.Constants;
-import ir.sami.trowel.R;
-import ir.sami.trowel.projects.ProjectListAdaptor;
+import ir.sami.trowel.camera.CameraActivity;
+import ir.sami.trowel.data.ModelBuildConfig;
+import ir.sami.trowel.databinding.ActivityProjectDetailBinding;
+import ir.sami.trowel.project_detail.ui.main.SectionsPagerAdapter;
 
 public class ProjectDetailActivity extends AppCompatActivity {
 
-    ProjectDetailListAdaptor projectDetailListAdaptor;
-    private RecyclerView projectList;
+    private ActivityProjectDetailBinding binding;
     private String projectName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_detail);
 
-        projectList = (RecyclerView) findViewById(R.id.thumbnail_list);
-
-        projectDetailListAdaptor = new ProjectDetailListAdaptor();
-        projectList.setLayoutManager(new GridLayoutManager(this, 4, RecyclerView.VERTICAL, false));
-        projectList.setAdapter(projectDetailListAdaptor);
-        projectDetailListAdaptor.setClickHandler((ProjectDetailListAdaptor.OnClickListener) uri -> {
-
-        });
+        binding = ActivityProjectDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         this.projectName = this.getIntent().getExtras().getString(Constants.PROJECT_NAME_REFERENCE);
-        this.setTitle(projectName);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), projectName);
+        ViewPager viewPager = binding.viewPager;
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = binding.tabs;
+        tabs.setupWithViewPager(viewPager);
+        FloatingActionButton fab = binding.fab;
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+
+    public void addImage(View view) {
+        Intent navigationIntent = new Intent(this, CameraActivity.class);
         File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");
         File projectRoot = new File(trowelRoot, projectName);
         File rawImagesRoot = new File(projectRoot, "Raw Images");
-        if (!rawImagesRoot.exists())
-            return;
-        List<String> thumbnails = Arrays.stream(rawImagesRoot.listFiles()).map(f -> f.getAbsolutePath()).collect(Collectors.toList());
-        projectDetailListAdaptor.setThumbnails(thumbnails);
-        projectDetailListAdaptor.notifyDataSetChanged();
+        String[] files = rawImagesRoot.list();
+        navigationIntent.putExtra(Constants.PROJECT_NAME_REFERENCE, this.projectName);
+        if (files == null || files.length == 0)
+            navigationIntent.putExtra(Constants.PROJECT_DETAIL_LIST_LAST_FILE_NAME, "");
+        else {
+            List<String> filess = Arrays.stream(files).sorted().collect(Collectors.toList());
+            navigationIntent.putExtra(Constants.PROJECT_DETAIL_LIST_LAST_FILE_NAME, filess.get(filess.size() - 1));
+
+        }
+        startActivity(navigationIntent);
     }
 
-    public void addImage(View view) {
-
+    public void buildCommand(View view) {
+        ModelBuildConfig config = new ModelBuildConfig();
+        config.setProjectName(this.projectName);
+        config.setFeatureDescriberMethod("SIFT");
+        config.setFeatureDescriberPreset("ULTRA");
+        config.setComputeFeatureUpRight(false);
+        config.setMatchGeometricModel(ModelBuildConfig.MatchGeometricModel.EssentialMatrixFiltering);
+        config.setMaxImageDimension(1000);
+        config.setMatchRatio("0.8f");
+        config.setMatchMethod("FASTCASCADEHASHINGL2");
+        ModelBuildConfig.ReconstructionRefinement reconstructionRefinement = new ModelBuildConfig.ReconstructionRefinement();
+        reconstructionRefinement.setDistortion(true);
+        reconstructionRefinement.setPrincipalPoint(true);
+        reconstructionRefinement.setFocalLength(true);
+        config.setReconstructionRefinement(reconstructionRefinement);
+        config.setFixPoseBundleAdjustment(true);
     }
-
 }

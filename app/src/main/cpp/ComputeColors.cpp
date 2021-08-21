@@ -34,7 +34,7 @@ void GetCameraPositions(const SfM_Data & sfm_data, std::vector<Vec3> & vec_camPo
 
 // Convert from a SfM_Data format to another
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_computeDataColor(
+Java_ir_sami_trowel_services_BuildModelTask_computeDataColor(
         JNIEnv *env,
         jobject obj, jstring jsSfM_Data_Filename_In, jstring jsOutputPLY_Out) {
 

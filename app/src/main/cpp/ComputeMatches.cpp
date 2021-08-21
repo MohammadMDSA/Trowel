@@ -57,7 +57,7 @@ enum EPairMode
 };
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_computeMatches(
+Java_ir_sami_trowel_services_BuildModelTask_computeMatches(
         JNIEnv *env,
         jobject /* this */, jstring jsSfM_Data_Filename, jstring jsMatchesDirectory, jstring jsGeometricModel, jstring jfDistRatio, jstring jsNearestMatchingMethod) {
 

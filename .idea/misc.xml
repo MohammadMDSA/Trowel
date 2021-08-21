@@ -3,13 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_camera.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_camera.xml" value="0.18" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_project_detail.xml" value="0.20625" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/activity_project_list.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/fragment_build_config.xml" value="0.33" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/fragment_file_chooser.xml" value="0.10030395136778116" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/fragment_project_detail.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/fragment_project_detail_config.xml" value="0.25" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/project_detail_list_item.xml" value="0.20625" />
         <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/project_list_item.xml" value="0.20625" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/root_preferences.xml" value="0.35643115942028986" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/layout/settings_activity.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/xml/root_preferences.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/PCMD/AndroidStudioProjects/Trowel/app/src/main/res/xml/root_preferences_fragment.xml" value="0.21348314606741572" />
       </map>
     </option>
   </component>

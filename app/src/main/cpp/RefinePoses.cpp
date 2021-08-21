@@ -54,9 +54,9 @@ Pair_Set BuildPairsFromFrustumsIntersections(
 /// Compute the structure of a scene according existing camera poses.
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_refinePoses(
+Java_ir_sami_trowel_services_BuildModelTask_refinePoses(
         JNIEnv *env,
-        jobject obj, jstring jsSfM_Data_Filename, jstring jsMatchesDir, jstring jsOutFile, jstring juseBundleAdjustment, jstring jbDirect_triangulation) {
+        jobject obj, jstring jsSfM_Data_Filename, jstring jsMatchesDir, jstring jsOutFile, jstring juseBundleAdjustment, jstring jbDirect_triangulation, jstring jsMatchFile) {
 
     using namespace std;
     std::cout << "Compute Structure from the provided poses" << std::endl;
@@ -64,7 +64,7 @@ Java_ir_sami_trowel_MainActivity_refinePoses(
     jboolean copy = true;
     std::string sSfM_Data_Filename = env->GetStringUTFChars(jsSfM_Data_Filename, &copy);
     std::string sMatchesDir = env->GetStringUTFChars(jsMatchesDir, &copy);
-    std::string sMatchFile;
+    std::string sMatchFile = env->GetStringUTFChars(jsMatchFile, &copy);
     std::string sPairFile;
     std::string sOutFile = env->GetStringUTFChars(jsOutFile, &copy);
     bool useBundleAdjustment = env->GetStringUTFChars(juseBundleAdjustment, &copy)[0] == 1;

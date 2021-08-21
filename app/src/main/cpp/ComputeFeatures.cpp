@@ -59,7 +59,7 @@ features::EDESCRIBER_PRESET stringToEnum(const std::string & sPreset)
 /// - Export computed data
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_computeFeatures(
+Java_ir_sami_trowel_services_BuildModelTask_computeFeatures(
         JNIEnv *env,
         jobject /* this */, jstring jsSfM_Data_Filename, jstring jsOutDir, jstring jbUpRight, jstring jsImage_Describer_Method, jstring jsFeaturePreset) {
 

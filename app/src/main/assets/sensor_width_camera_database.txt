@@ -4591,7 +4591,7 @@ Panasonic Lumix DMC-ZS8;6.08
 Panasonic Lumix DMC-ZX1;6.08
 Panasonic Lumix DMC-ZX3;6.08
 Panasonic Lumix GH4R;17.3
-Panasonic Lumix Smart Camera CM1;13.2
+Panasonic Lumix Sart Camera CM1;13.2
 Panasonic P9;3.68
 Panasonic PV DC3000;7.11
 Panasonic T44;2.95

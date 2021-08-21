@@ -46,7 +46,7 @@ public class ProjectDetailListAdaptor extends RecyclerView.Adapter<ProjectDetail
         this.clickHandler = clickHandler;
     }
 
-    interface OnClickListener {
+    public interface OnClickListener {
         void click(String uri);
     }
 }

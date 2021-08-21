@@ -1,0 +1,77 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/build_config_image">
+        <EditTextPreference app:key="image_max"
+            app:title="@string/build_config_setup_max_image_dimension"/>
+    </PreferenceCategory>
+    <PreferenceCategory app:title="@string/build_config_feature">
+
+        <SwitchPreference
+            app:key="upright"
+            app:title="@string/build_config_feature_upright" />
+
+        <ListPreference
+            app:defaultValue="SIFT"
+            app:entries="@array/build_config_feature_describer_method_texts"
+            app:entryValues="@array/build_config_feature_describer_method_values"
+            app:key="reply"
+            app:title="@string/build_config_feature_describer_method"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="NORMAL"
+            app:entries="@array/build_config_feature_describer_preset_texts"
+            app:entryValues="@array/build_config_feature_describer_preset_values"
+            app:key="reply"
+            app:title="@string/build_config_feature_describer_preset"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/build_config_match">
+
+        <ListPreference
+            app:key="geom_model"
+            app:title="@string/build_config_match_geometric_model"
+            android:defaultValue="e"
+            android:entries="@array/build_config_match_geometric_model_texts"
+            android:entryValues="@array/build_config_match_geometric_model_values"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:key="match_ratio"
+            app:title="@string/build_config_match_ratio"
+            app:defaultValue="0.8f"
+            app:entryValues="@array/build_config_match_ratio_values"
+            app:entries="@array/build_config_match_ratio_texts"
+            app:useSimpleSummaryProvider="true" />
+
+
+        <ListPreference
+            app:key="match_method"
+            app:title="@string/build_config_match_method"
+            app:defaultValue="AUTO"
+            app:entryValues="@array/build_config_match_method_values"
+            app:entries="@array/build_config_match_method_texts"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/build_config_reconstruction">
+
+        <SwitchPreference
+            app:key="refine_distortion"
+            app:title="@string/build_config_reconstruction_refinement_distortion"
+            app:defaultValue="true"/>
+        <SwitchPreference
+            app:key="refine_principal_point"
+            app:title="@string/build_config_reconstruction_refinement_principal_point"
+            app:defaultValue="true"/>
+        <SwitchPreference
+            app:key="refine_focal_length"
+            app:title="@string/build_config_reconstruction_refinement_focal_length"
+            app:defaultValue="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

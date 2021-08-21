@@ -71,6 +71,13 @@
         android:onClick="refine"
         android:text="Fix Poses" />
 
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="colorizeRefined"
+        android:text="Colorize Fiexed" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

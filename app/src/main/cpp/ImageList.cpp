@@ -123,7 +123,7 @@ std::pair<bool, Vec3> checkPriorWeightsString
 //
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_imageList(
+Java_ir_sami_trowel_services_BuildModelTask_imageList(
         JNIEnv *env,
         jobject obj, jstring sImageDirS, jstring sfileDatabaseS, jstring sOutputDirS,
         jstring jfocal_pixels) {

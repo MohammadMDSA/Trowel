@@ -18,10 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Trowel">
         <activity
-            android:name=".camera.CameraActivity"
-            android:exported="true" />
-        <activity
             android:name=".project_detail.ProjectDetailActivity"
+            android:exported="true"
+            android:label="@string/title_activity_project_detail"
+            android:theme="@style/Theme.Trowel.NoActionBar" />
+        <activity
+            android:name=".camera.CameraActivity"
             android:exported="true" />
         <activity
             android:name=".projects.ProjectListActivity"

@@ -80,7 +80,7 @@ int getCameraModel(std::string sModel) {
 }
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_ir_sami_trowel_MainActivity_incrementalReconstruct(
+Java_ir_sami_trowel_services_BuildModelTask_incrementalReconstruct(
         JNIEnv *env,
         jobject obj, jstring jsSfM_Data_Filename, jstring jsMatchesDir, jstring jsOutDir,
         jstring jsIntrinsic_refinement_options, jstring jsSfMInitializer_method, jstring jcameraModel) {
