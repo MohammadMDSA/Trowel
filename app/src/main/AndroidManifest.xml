@@ -20,8 +20,7 @@
         <activity
             android:name=".project_detail.ProjectDetailActivity"
             android:exported="true"
-            android:label="@string/title_activity_project_detail"
-            android:theme="@style/Theme.Trowel.NoActionBar" />
+            android:label="@string/title_activity_project_detail"/>
         <activity
             android:name=".camera.CameraActivity"
             android:exported="true" />

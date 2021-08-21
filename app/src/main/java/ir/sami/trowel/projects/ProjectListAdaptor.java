@@ -29,6 +29,7 @@ public class ProjectListAdaptor extends RecyclerView.Adapter<ProjectItemViewHold
     public void onBindViewHolder(@NonNull ProjectItemViewHolder holder, int position) {
         holder.bind(projects.get(position));
         holder.itemView.setOnClickListener(view -> clickHandler.click(projects.get(position)));
+        holder.itemView.findViewById(R.id.btn_project_delete).setOnClickListener(view -> clickHandler.delete(projects.get(position)));
     }
 
     @Override
@@ -46,5 +47,6 @@ public class ProjectListAdaptor extends RecyclerView.Adapter<ProjectItemViewHold
 
     interface OnClickListener {
         void click(String uri);
+        void delete(String uri);
     }
 }

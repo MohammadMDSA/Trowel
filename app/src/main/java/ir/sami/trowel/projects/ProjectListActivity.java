@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
@@ -19,19 +22,41 @@ import java.util.Arrays;
 
 import ir.sami.trowel.Constants;
 import ir.sami.trowel.R;
+import ir.sami.trowel.databinding.ActivityProjectListBinding;
+import ir.sami.trowel.dialogs.ProjectNameDialogFragment;
+import ir.sami.trowel.dialogs.SubmissionDialogFragment;
 import ir.sami.trowel.project_detail.ProjectDetailActivity;
 
-public class ProjectListActivity extends AppCompatActivity {
+public class ProjectListActivity extends AppCompatActivity implements ProjectNameDialogFragment.NoticeDialogListener, SubmissionDialogFragment.NoticeDialogListener {
 
+    private ActivityProjectListBinding binding;
     private ProjectListAdaptor projectListAdaptor;
     private RecyclerView projectList;
 
     private static final int MY_PERMISSIONS_REQUEST_ID = 12;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.manu_project_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.create_project:
+                ProjectNameDialogFragment projectNameDialogFragment = new ProjectNameDialogFragment();
+                projectNameDialogFragment.show(getSupportFragmentManager(), "ProjectName");
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityProjectListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setContentView(R.layout.activity_project_list);
 
         projectList = (RecyclerView) findViewById(R.id.project_list);
@@ -39,10 +64,19 @@ public class ProjectListActivity extends AppCompatActivity {
         projectListAdaptor = new ProjectListAdaptor();
         projectList.setLayoutManager(new LinearLayoutManager(this));
         projectList.setAdapter(projectListAdaptor);
-        projectListAdaptor.setClickHandler(uri -> {
-            Intent navigationIntent = new Intent(this, ProjectDetailActivity.class);
-            navigationIntent.putExtra(Constants.PROJECT_NAME_REFERENCE, uri);
-            startActivity(navigationIntent);
+        projectListAdaptor.setClickHandler(new ProjectListAdaptor.OnClickListener() {
+            @Override
+            public void click(String uri) {
+                Intent navigationIntent = new Intent(ProjectListActivity.this, ProjectDetailActivity.class);
+                navigationIntent.putExtra(Constants.PROJECT_NAME_REFERENCE, uri);
+                startActivity(navigationIntent);
+            }
+
+            @Override
+            public void delete(String uri) {
+                SubmissionDialogFragment submissionDialogFragment = new SubmissionDialogFragment(uri);
+                submissionDialogFragment.show(getSupportFragmentManager(), "DeleteSubmission" + uri);
+            }
         });
         updateProjectListWrapper();
     }
@@ -109,9 +143,19 @@ public class ProjectListActivity extends AppCompatActivity {
     private void updateProjectList() {
         File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");
         String[] projects = trowelRoot.list();
-        if(projects == null)
+        if (projects == null)
             return;
         projectListAdaptor.setProjects(Arrays.asList(projects.clone()));
         projectListAdaptor.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        updateProjectListWrapper();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
