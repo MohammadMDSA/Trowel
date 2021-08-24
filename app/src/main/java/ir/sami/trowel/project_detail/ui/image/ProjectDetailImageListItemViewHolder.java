@@ -1,4 +1,4 @@
-package ir.sami.trowel.project_detail;
+package ir.sami.trowel.project_detail.ui.image;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -10,11 +10,11 @@ import com.bumptech.glide.Glide;
 
 import ir.sami.trowel.R;
 
-public class ProjectDetailListItemViewHolder extends RecyclerView.ViewHolder {
+public class ProjectDetailImageListItemViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView thumbnail;
 
-    public ProjectDetailListItemViewHolder(@NonNull View itemView) {
+    public ProjectDetailImageListItemViewHolder(@NonNull View itemView) {
         super(itemView);
         this.thumbnail = itemView.findViewById(R.id.thumbnail);
     }

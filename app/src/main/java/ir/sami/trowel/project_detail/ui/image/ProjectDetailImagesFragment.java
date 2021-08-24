@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 import ir.sami.trowel.R;
 import ir.sami.trowel.databinding.FragmentProjectDetailImagesBinding;
-import ir.sami.trowel.project_detail.ProjectDetailListAdaptor;
 import ir.sami.trowel.project_detail.ui.main.PageViewModel;
 
 /**
@@ -34,7 +33,7 @@ public class ProjectDetailImagesFragment extends Fragment {
     private PageViewModel pageViewModel;
     private FragmentProjectDetailImagesBinding binding;
     private String projectName;
-    private ProjectDetailListAdaptor projectDetaImagelListAdaptor;
+    private ProjectDetailImageListAdaptor projectDetaImagelListAdaptor;
     private RecyclerView projectList;
 
     public static ProjectDetailImagesFragment newInstance(String projectName) {
@@ -72,10 +71,10 @@ public class ProjectDetailImagesFragment extends Fragment {
         });
         projectList = (RecyclerView) root.findViewById(R.id.thumbnail_list);
 
-        projectDetaImagelListAdaptor = new ProjectDetailListAdaptor();
+        projectDetaImagelListAdaptor = new ProjectDetailImageListAdaptor();
         projectList.setLayoutManager(new GridLayoutManager(getActivity(), 4, RecyclerView.VERTICAL, false));
         projectList.setAdapter(projectDetaImagelListAdaptor);
-        projectDetaImagelListAdaptor.setClickHandler((ProjectDetailListAdaptor.OnClickListener) uri -> {
+        projectDetaImagelListAdaptor.setClickHandler((ProjectDetailImageListAdaptor.OnClickListener) uri -> {
 
         });
         File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");

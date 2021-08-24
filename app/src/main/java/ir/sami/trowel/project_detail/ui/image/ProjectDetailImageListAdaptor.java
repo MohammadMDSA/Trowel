@@ -1,4 +1,4 @@
-package ir.sami.trowel.project_detail;
+package ir.sami.trowel.project_detail.ui.image;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,24 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.sami.trowel.R;
-import ir.sami.trowel.projects.ProjectItemViewHolder;
-import ir.sami.trowel.projects.ProjectListAdaptor;
 
-public class ProjectDetailListAdaptor extends RecyclerView.Adapter<ProjectDetailListItemViewHolder> {
+public class ProjectDetailImageListAdaptor extends RecyclerView.Adapter<ProjectDetailImageListItemViewHolder> {
 
     private List<String> thumbnails = new ArrayList<>();
     private OnClickListener clickHandler;
 
     @NonNull
     @Override
-    public ProjectDetailListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProjectDetailImageListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.project_detail_list_item, parent, false);
-        return new ProjectDetailListItemViewHolder(view);
+        return new ProjectDetailImageListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProjectDetailListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProjectDetailImageListItemViewHolder holder, int position) {
         holder.bind(thumbnails.get(position));
         holder.itemView.setOnClickListener(view -> clickHandler.click(thumbnails.get(position)));
     }
