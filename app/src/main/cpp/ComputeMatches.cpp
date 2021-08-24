@@ -67,7 +67,7 @@ Java_ir_sami_trowel_services_BuildModelTask_computeMatches(
     std::string sMatchesDirectory = env->GetStringUTFChars(jsMatchesDirectory, &copy);
     std::string sGeometricModel = env->GetStringUTFChars(jsGeometricModel, &copy);
     float fDistRatio = std::stof(env->GetStringUTFChars(jfDistRatio, &copy));
-    int iMatchingVideoMode = -1;
+    int iMatchingVideoMode = 5;
     std::string sPredefinedPairList = "";
     std::string sNearestMatchingMethod = env->GetStringUTFChars(jsNearestMatchingMethod, &copy);
     bool bForce = false;
