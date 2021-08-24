@@ -4,7 +4,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import android.util.Log;
 
-import org.andresoviedo.android_3d_model_engine.R;
 import org.andresoviedo.android_3d_model_engine.model.AnimatedModel;
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.util.io.IOUtils;
@@ -13,6 +12,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+
+import ir.sami.trowel.R;
 
 /**
  * Copyright 2013-2020 andresoviedo.org

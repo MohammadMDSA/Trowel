@@ -29,7 +29,7 @@ public final class ModelViewerGUI extends GUI {
     private Menu3D menu;
     private Rotator rotator;
 
-    ModelViewerGUI(ModelSurfaceView glView, SceneLoader scene) {
+    public ModelViewerGUI(ModelSurfaceView glView, SceneLoader scene) {
         super();
         this.glView = glView;
         this.scene = scene;

@@ -21,12 +21,19 @@
 
     </FrameLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button8"
-        android:layout_width="wrap_content"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
         android:onClick="takePicture"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:insetTop="0dp"
+        android:layout_marginBottom="10dp"
+        app:iconPadding="0dp"
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

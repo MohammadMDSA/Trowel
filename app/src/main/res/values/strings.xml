@@ -84,6 +84,10 @@
     <string name="sure">Sure</string>
     <string name="project_list_delete_not_exists">Project doesn\'t exists!</string>
     <string name="project_list_delete_failed">Failed to delete project!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toggle_wireframe">Toggle Wireframe</string>
+    <string name="toggle_lights">Toggle Lights</string>
+    <string name="toggle_textures">Toggle Texture</string>
+    <string name="toggle_animation">Toggle Animation</string>
+    <string name="load_texture">Load Texture</string>
+    <string name="toggle_boundingbox">Toggle Bounding Box</string>
 </resources>
