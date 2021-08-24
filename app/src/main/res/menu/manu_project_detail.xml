@@ -2,6 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <item
+        android:id="@+id/view_model"
+        android:icon="@drawable/ic_baseline_3d_rotation_24"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/stop_build"
         android:icon="@drawable/ic_baseline_stop_24"
         android:title="@string/project_list_create_project"
