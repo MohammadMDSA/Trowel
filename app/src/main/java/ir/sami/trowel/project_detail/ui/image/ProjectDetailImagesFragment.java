@@ -55,8 +55,6 @@ public class ProjectDetailImagesFragment extends Fragment {
         }
         pageViewModel.setIndex(index);
 
-
-
     }
 
     @Override

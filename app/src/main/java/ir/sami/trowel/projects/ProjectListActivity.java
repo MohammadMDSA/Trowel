@@ -35,6 +35,14 @@ public class ProjectListActivity extends AppCompatActivity implements ProjectNam
 
     private static final int MY_PERMISSIONS_REQUEST_ID = 12;
 
+    static {
+        try {
+            System.loadLibrary("openMVG");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.manu_project_list, menu);

@@ -1,11 +1,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="0">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/build_config_image">
-        <EditTextPreference
+        <SeekBarPreference
+            android:id="@+id/image_max_dim"
+            android:max="5000"
             app:defaultValue="1000"
-            app:key="image_max"
+            app:key="image_max_dim"
+            app:min="300"
             app:title="@string/build_config_setup_max_image_dimension"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>

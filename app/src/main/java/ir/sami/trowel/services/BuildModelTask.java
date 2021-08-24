@@ -1,6 +1,12 @@
 package ir.sami.trowel.services;
 
+import static ir.sami.trowel.Constants.BUILD_NOTIFICATION_CHANNEL_ID;
+
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -8,23 +14,30 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import ir.sami.trowel.Constants;
+import ir.sami.trowel.R;
 import ir.sami.trowel.data.ModelBuildConfig;
+import ir.sami.trowel.project_detail.ProjectDetailActivity;
 import ir.sami.trowel.utils.Utils;
 
-public class BuildModelTask extends AsyncTask<String, String, String> {
+public class BuildModelTask extends AsyncTask<String, Integer, String> {
 
     private Date operationStartTime;
-    private ModelBuildConfig config;
-    private Context context;
+    private final ModelBuildConfig config;
+    private final Service context;
 
-    public BuildModelTask(ModelBuildConfig config, Context context) {
+    public BuildModelTask(ModelBuildConfig config, Service context) {
         this.config = config;
+        this.context = context;
     }
 
     @Override
@@ -33,7 +46,10 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         File projectRoot = new File(trowelRoot, config.getProjectName());
         File images = new File(projectRoot, "images");
         File rawImages = new File(projectRoot, "Raw Images");
-        File sensorDatabase = new File(Environment.getDataDirectory(), "sensor_width_camera_database.txt");
+        if(!rawImages.exists())
+            return "SUCCESS";
+        File sensorDatabase = new File(context.getDataDir(), "sensor_width_camera_database.txt");
+        publishProgress(0);
 
 ////////////////////////////////////////
 ////////////// Normalize ///////////////
@@ -45,7 +61,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
                 File resImage = new File(images, FilenameUtils.getBaseName(image.getName()) + ".jpg");
                 Utils.resize(image.getAbsolutePath(), resImage.getAbsolutePath(), config.getMaxImageDimension());
             }
-            publishProgress("Normalized images");
+            publishProgress(1);
         }
 ////////////////////////////////////////
 ////////////// Make List ///////////////
@@ -75,7 +91,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
             ListResult = imageList(images.getAbsolutePath(), sensorDatabase.getAbsolutePath(), matchesDir.getAbsolutePath(), Utils.getFocalLengthInPixels(cameraCharacteristics, config.getMaxImageDimension()) + "");
             if (failed(ListResult))
                 return "FAILED";
-            publishProgress("Created image list");
+            publishProgress(2);
 
         }
 ////////////////////////////////////////
@@ -86,7 +102,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         String featureResult = computeFeatures(matchesFile.getAbsolutePath(), matchesDir.getAbsolutePath(), config.isComputeFeatureUpRight(), config.getFeatureDescriberMethod(), config.getFeatureDescriberPreset());
         if (failed(featureResult))
             return "FAILED";
-        publishProgress("Computed features");
+        publishProgress(3);
 
 ////////////////////////////////////////
 /////////// Compute Matches ////////////
@@ -95,7 +111,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         String matchResult = computeMatches(matchesFile.getAbsolutePath(), matchesDir.getAbsolutePath(), config.getMatchGeometricModel(), config.getMatchRatio(), config.getMatchMethod());
         if (failed(matchResult))
             return "FAILED";
-        publishProgress("Computed matches");
+        publishProgress(4);
 
 ////////////////////////////////////////
 ///////////// Reconstruct //////////////
@@ -104,7 +120,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         String reconstructResult = incrementalReconstruct(matchesFile.getAbsolutePath(), matchesDir.getAbsolutePath(), matchesDir.getAbsolutePath(), config.getReconstructionRefinement(), "STELLAR", "PINHOLE_CAMERA_RADIAL3");
         if (failed(reconstructResult))
             return "FAILED";
-        publishProgress("Reconstructed 3d cloud");
+        publishProgress(5);
 
 ////////////////////////////////////////
 ////////////// Fix Poses ///////////////
@@ -116,7 +132,7 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         String fixPostResult = refinePoses(matchesFile.getAbsolutePath(), matchesDir.getAbsolutePath(), robustFile.getAbsolutePath(), config.isFixPoseBundleAdjustment(), "1", matchData.getAbsolutePath());
         if (failed(fixPostResult))
             return "FAILED";
-        publishProgress("Fixed poses");
+        publishProgress(6);
 
 ////////////////////////////////////////
 /////////////// Colorize ///////////////
@@ -126,14 +142,56 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
         String colorizeResult = computeDataColor(robustFile.getAbsolutePath(), colorized.getAbsolutePath());
         if (failed(colorizeResult))
             return "FAILED";
-        publishProgress("Colorized result");
+        publishProgress(7);
 
         return "SUCCESS";
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
+    protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+        String stage;
+        switch (values[0]) {
+            default:
+            case 0:
+                stage = "Reducing Image Size";
+                break;
+            case 1:
+                stage = "Creating Image List";
+                break;
+            case 2:
+                stage = "Computing Image Features";
+                break;
+            case 3:
+                stage = "Computing Matches";
+                break;
+            case 4:
+                stage = "Reconstructing 3D Cloud";
+                break;
+            case 5:
+                stage = "Adjusting Cloud";
+                break;
+            case 6:
+                stage = "Colorizing Cloud";
+                break;
+            case 7:
+                stage = "Done!";
+                break;
+        }
+        Intent notificationIntent = new Intent(context, ProjectDetailActivity.class);
+        notificationIntent.putExtra(Constants.PROJECT_NAME_REFERENCE, config.getProjectName());
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,
+                0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new NotificationCompat.Builder(context, Constants.BUILD_NOTIFICATION_CHANNEL_ID)
+                .setContentTitle(stage)
+                .setContentText(config.getProjectName())
+                .setProgress(7, values[0], false)
+                .setSmallIcon(R.drawable.trowel_svgrepo_com)
+                .setContentIntent(pendingIntent)
+                .build();
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(Constants.BUILD_NOTIFICATION_ID, notification);
+
     }
 
     private boolean failed(String res) {
@@ -158,6 +216,12 @@ public class BuildModelTask extends AsyncTask<String, String, String> {
 //            binding.progressBar.setVisibility(View.INVISIBLE);
 //        }
 
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        context.stopSelf();
+    }
 
     public native String imageList(String sImageDir, String sfileDatabase, String sOutputDir, String jfocal_pixels);
 

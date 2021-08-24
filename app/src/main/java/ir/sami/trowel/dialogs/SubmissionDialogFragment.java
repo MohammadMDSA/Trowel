@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.io.File;
 
 import ir.sami.trowel.R;
+import ir.sami.trowel.utils.Utils;
 
 public class SubmissionDialogFragment extends DialogFragment {
 
@@ -35,15 +36,8 @@ public class SubmissionDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.sure, (dialogInterface, i) -> {
                     File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");
                     File project = new File(trowelRoot, projectName);
-                    if (!project.exists()) {
-                        Toast.makeText(getActivity(), R.string.project_list_delete_not_exists, Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (!project.delete()) {
-                            Toast.makeText(getActivity(), R.string.project_list_delete_failed, Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        listener.onDialogPositiveClick(this);
-                    }
+                    Utils.deleteDirectory(project);
+                    listener.onDialogPositiveClick(this);
                 })
                 .setNegativeButton(R.string.cancel, null);
         return builder.create();

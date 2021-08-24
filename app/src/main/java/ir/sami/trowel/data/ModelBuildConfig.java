@@ -13,7 +13,7 @@ public class ModelBuildConfig {
     private int maxImageDimension;
     private String featureDescriberMethod;
     private String featureDescriberPreset;
-    private MatchGeometricModel matchGeometricModel;
+    private String matchGeometricModel;
     private String matchRatio;
     private String matchMethod;
     private ReconstructionRefinement reconstructionRefinement;
@@ -60,10 +60,10 @@ public class ModelBuildConfig {
     }
 
     public String getMatchGeometricModel() {
-        return matchGeometricModel.getValue();
+        return matchGeometricModel;
     }
 
-    public void setMatchGeometricModel(MatchGeometricModel matchGeometricModel) {
+    public void setMatchGeometricModel(String matchGeometricModel) {
         this.matchGeometricModel = matchGeometricModel;
     }
 
@@ -97,22 +97,6 @@ public class ModelBuildConfig {
 
     public void setFixPoseBundleAdjustment(boolean fixPoseBundleAdjustment) {
         this.fixPoseBundleAdjustment = fixPoseBundleAdjustment;
-    }
-
-    public enum MatchGeometricModel {
-        FundamentalMatrixFiltering("f"),
-        EssentialMatrixFiltering("e"),
-        HomographyMatrixFiltering("h");
-
-        private String value;
-
-        MatchGeometricModel(String val) {
-            this.value = val;
-        }
-
-        public String getValue() {
-            return value;
-        }
     }
 
     public static class ReconstructionRefinement {

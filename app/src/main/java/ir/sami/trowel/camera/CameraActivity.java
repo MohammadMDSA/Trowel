@@ -76,13 +76,12 @@ public class CameraActivity extends AppCompatActivity {
         File trowelRoot = new File(Environment.getExternalStorageDirectory(), "Trowel");
         File projectRoot = new File(trowelRoot, projectName);
         File rawImagesRoot = new File(projectRoot, "Raw Images");
-        String extension = FilenameUtils.getExtension(lastFileName);
         String lastBaseName = FilenameUtils.getBaseName(lastFileName);
-        String fileName = lastBaseName + fileIndex + "." + extension;
+        String fileName = lastBaseName + fileIndex + ".jpg";
         File newFile = new File(rawImagesRoot, fileName);
         while (newFile.exists()) {
             fileIndex++;
-            fileName = lastBaseName + fileIndex + "." + extension;
+            fileName = lastBaseName + fileIndex + ".jpg";
             newFile = new File(rawImagesRoot, fileName);
         }
         fileIndex++;

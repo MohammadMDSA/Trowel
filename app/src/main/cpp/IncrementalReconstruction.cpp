@@ -156,10 +156,12 @@ Java_ir_sami_trowel_services_BuildModelTask_incrementalReconstruct(
     if // Try to read the provided match filename or the default one (matches.f.txt/bin)
             (
             !(matches_provider->load(sfm_data, sMatchFilename) ||
-              matches_provider->load(sfm_data,
-                                     stlplus::create_filespec(sMatchesDir, "matches.f.txt")) ||
-              matches_provider->load(sfm_data,
-                                     stlplus::create_filespec(sMatchesDir, "matches.f.bin")))
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.f.txt")) ||
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.f.bin")) ||
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.e.txt")) ||
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.e.bin")) ||
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.h.txt")) ||
+              matches_provider->load(sfm_data, stlplus::create_filespec(sMatchesDir, "matches.h.bin")))
             ) {
         std::cerr << std::endl
                   << "Invalid matches file." << std::endl;

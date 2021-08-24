@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minWidth="1000dp">
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/inp_project_name"
@@ -33,6 +33,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:onClick="delte"/>
+        tools:ignore="SpeakableTextPresentCheck"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.hardware.Camera;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.util.Pair;
 
@@ -82,12 +83,15 @@ public class Utils {
 
 
     public static Bitmap resize(Bitmap realImage, float maxImageSize, boolean filter) {
-        float ratio = Math.min(
-                (float) maxImageSize / realImage.getWidth(),
-                (float) maxImageSize / realImage.getHeight());
-        int width = Math.round((float) ratio * realImage.getWidth());
-        int height = Math.round((float) ratio * realImage.getHeight());
-
+        int width = realImage.getWidth();
+        int height = realImage.getHeight();
+        if (maxImageSize < height || maxImageSize < width) {
+            float ratio = Math.min(
+                    (float) maxImageSize / realImage.getWidth(),
+                    (float) maxImageSize / realImage.getHeight());
+            width = Math.round((float) ratio * realImage.getWidth());
+            height = Math.round((float) ratio * realImage.getHeight());
+        }
         return Bitmap.createScaledBitmap(realImage, width, height, filter);
     }
 
@@ -97,4 +101,27 @@ public class Utils {
         return maxWidthHeight * focalLength / sensorWidth;
     }
 
+    public static File getTrowelRoot() {
+        return new File(Environment.getExternalStorageDirectory(), "Trowel");
+    }
+
+    public static File getProjectRoot(String project) {
+        return new File(getTrowelRoot(), project);
+    }
+
+    public static void deleteDirectory(File file) {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    if (files[i].isDirectory()) {
+                        deleteDirectory(files[i]);
+                    } else {
+                        files[i].delete();
+                    }
+                }
+            }
+            file.delete();
+        }
+    }
 }
