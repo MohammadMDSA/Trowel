@@ -2,6 +2,7 @@ package ir.sami.trowel.utils;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -122,6 +123,14 @@ public class Utils {
                 }
             }
             file.delete();
+        }
+    }
+
+    public static void ensureAssetInData(Context context, String file) throws IOException {
+        File assetFile = new File(context.getDataDir(), file);
+        if(!assetFile.exists()){
+            assetFile.createNewFile();
+            copyStreamToFile(context.getAssets().open(file), assetFile);
         }
     }
 }

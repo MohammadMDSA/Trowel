@@ -1,6 +1,8 @@
 package org.andresoviedo.android_3d_model_engine.objects;
 
+import android.net.Uri;
 import android.opengl.GLES20;
+import android.os.Environment;
 import android.util.Log;
 
 import org.andresoviedo.android_3d_model_engine.model.CubeMap;
@@ -8,6 +10,7 @@ import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.util.android.ContentUtils;
 import org.andresoviedo.util.io.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -66,16 +69,16 @@ public class SkyBox {
 
     static {
 
-        for (int i=0; i<VERTEX_DATA.length; i++){
+        for (int i = 0; i < VERTEX_DATA.length; i++) {
             VERTEX_DATA[i] *= 1500;
         }
     }
 
-    public final URI[] images;
+    public final Uri[] images;
 
     private CubeMap cubeMap = null;
 
-    public SkyBox(URI[] images) throws IOException {
+    public SkyBox(Uri[] images) throws IOException {
         if (images == null || images.length != 6)
             throw new IllegalArgumentException("skybox must contain exactly 6 faces");
         this.images = images;
@@ -105,13 +108,13 @@ public class SkyBox {
      */
     public static SkyBox getSkyBox2() {
         try {
-            return new SkyBox(new URI[]{
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/posx.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/negx.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/posy.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/negy.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/posz.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/negz.png")});
+            return new SkyBox(new Uri[]{
+                    Uri.parse("android:///assets/posx.png"),
+                    Uri.parse("android:///assets/negx.png"),
+                    Uri.parse("android:///assets/posy.png"),
+                    Uri.parse("android:///assets/negy.png"),
+                    Uri.parse("android:///assets/posz.png"),
+                    Uri.parse("android:///assets/negz.png")});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -124,13 +127,13 @@ public class SkyBox {
      */
     public static SkyBox getSkyBox1() {
         try {
-            return new SkyBox(new URI[]{
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/right.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/left.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/top.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/bottom.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/front.png"),
-                    URI.create("android://org.andresoviedo.dddmodel2/res/drawable/back.png")});
+            return new SkyBox(new Uri[]{
+                    Uri.parse("android:///assets/right.jpg"),
+                    Uri.parse("android:///assets/left.jpg"),
+                    Uri.parse("android:///assets/top.jpg"),
+                    Uri.parse("android:///assets/bottom.jpg"),
+                    Uri.parse("android:///assets/front.jpg"),
+                    Uri.parse("android:///assets/back.jpg")});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

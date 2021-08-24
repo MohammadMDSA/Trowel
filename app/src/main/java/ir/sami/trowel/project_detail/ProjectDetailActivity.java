@@ -2,6 +2,7 @@ package ir.sami.trowel.project_detail;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -24,6 +25,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +38,7 @@ import ir.sami.trowel.camera.CameraActivity;
 import ir.sami.trowel.data.ModelBuildConfig;
 import ir.sami.trowel.databinding.ActivityProjectDetailBinding;
 import ir.sami.trowel.dialogs.ProjectNameDialogFragment;
+import ir.sami.trowel.model_viewer.ModelViewerActivity;
 import ir.sami.trowel.project_detail.ui.main.SectionsPagerAdapter;
 import ir.sami.trowel.services.BuildModelService;
 import ir.sami.trowel.services.BuildModelTask;
@@ -93,8 +98,43 @@ public class ProjectDetailActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "There are no images in the project", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.view_model:
+                try {
+                    load3DModel();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
         }
         return true;
+    }
+
+    private void load3DModel() throws URISyntaxException {
+        File shipFile = new File(this.getDataDir(), "ship.obj");
+        File shipMtlFile = new File(this.getDataDir(), "ship.mtl");
+        File shipBmpFile = new File(this.getDataDir(), "ship.bmp");
+        File shipPngFile = new File(this.getDataDir(), "ship.png");
+
+        if (!shipFile.exists()) {
+            try {
+                shipFile.createNewFile();
+                shipMtlFile.createNewFile();
+                shipBmpFile.createNewFile();
+                shipPngFile.createNewFile();
+                Utils.copyStreamToFile(this.getAssets().open("ship.obj"), shipFile);
+                Utils.copyStreamToFile(this.getAssets().open("ship.mtl"), shipMtlFile);
+                Utils.copyStreamToFile(this.getAssets().open("ship.bmp"), shipBmpFile);
+                Utils.copyStreamToFile(this.getAssets().open("ship.png"), shipPngFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Intent intent = new Intent(getApplicationContext(), ModelViewerActivity.class);
+        Uri modelUri = Uri.parse("android:///assets/ship.obj");
+        intent.putExtra("uri", URI.create("file:///data/data/ir.sami.trowel/ship.obj").toString());
+        intent.putExtra("immersiveMode", "false");
+        startActivity(intent);
     }
 
     public void addImage(View view) {

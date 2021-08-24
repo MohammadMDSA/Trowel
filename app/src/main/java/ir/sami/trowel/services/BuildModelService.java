@@ -59,8 +59,6 @@ public class BuildModelService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(Constants.BUILD_NOTIFICATION_ID, notification);
-        //do heavy work on a background thread
-//        stopSelf();
         ModelBuildConfig config = getConfig();
         config.setProjectName(projectName);
         task = new BuildModelTask(config, this);

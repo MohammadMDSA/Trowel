@@ -102,7 +102,7 @@ public class ContentUtils {
 
     public static InputStream getInputStream(Uri uri) throws IOException {
         Log.i("ContentUtils", "Opening stream ..." + uri);
-        if (uri.getScheme().equals("android")) {
+        if ("android".equals(uri.getScheme())) {
             if (uri.getPath().startsWith("/assets/")) {
                 final String path = uri.getPath().substring("/assets/".length());
                 Log.i("ContentUtils", "Opening asset: " + path);
@@ -117,10 +117,10 @@ public class ContentUtils {
                 throw new IllegalArgumentException("unknown android path: "+uri.getPath());
             }
         }
-        if (uri.getScheme().equals("http") || uri.getScheme().equals("https")) {
+        if ("http".equals(uri.getScheme()) || "https".equals(uri.getScheme())) {
             return new URL(uri.toString()).openStream();
         }
-        if (uri.getScheme().equals("content")) {
+        if ("content".equals(uri.getScheme())) {
             return getCurrentActivity().getContentResolver().openInputStream(uri);
         }
         return getCurrentActivity().getContentResolver().openInputStream(uri);

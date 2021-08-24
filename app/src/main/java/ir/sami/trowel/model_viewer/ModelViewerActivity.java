@@ -31,6 +31,7 @@ import java.util.EventObject;
 
 import ir.sami.trowel.R;
 import ir.sami.trowel.utils.ModelViewerGUI;
+import ir.sami.trowel.utils.Utils;
 
 public class ModelViewerActivity extends AppCompatActivity implements EventListener {
 
@@ -70,12 +71,18 @@ public class ModelViewerActivity extends AppCompatActivity implements EventListe
         Log.i("ModelActivity", "Loading activity...");
         super.onCreate(savedInstanceState);
 
+        try {
+            loadSkyBoxImages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Try to get input parameters
         Bundle b = getIntent().getExtras();
         if (b != null) {
             try {
                 if (b.getString("uri") != null) {
-                    this.paramUri = new URI(    b.getString("uri"));
+                    this.paramUri = new URI(b.getString("uri"));
                     Log.i("ModelActivity", "Params: uri '" + paramUri + "'");
                 }
                 this.paramType = b.getString("type") != null ? Integer.parseInt(b.getString("type")) : -1;
@@ -174,6 +181,22 @@ public class ModelViewerActivity extends AppCompatActivity implements EventListe
 
         Log.i("ModelActivity", "Finished loading");
     }
+
+    private void loadSkyBoxImages() throws IOException {
+        Utils.ensureAssetInData(this, "posx.png");
+        Utils.ensureAssetInData(this, "negx.png");
+        Utils.ensureAssetInData(this, "posy.png");
+        Utils.ensureAssetInData(this, "negy.png");
+        Utils.ensureAssetInData(this, "posz.png");
+        Utils.ensureAssetInData(this, "negz.png");
+        Utils.ensureAssetInData(this, "right.jpg");
+        Utils.ensureAssetInData(this, "left.jpg");
+        Utils.ensureAssetInData(this, "top.jpg");
+        Utils.ensureAssetInData(this, "bottom.jpg");
+        Utils.ensureAssetInData(this, "front.jpg");
+        Utils.ensureAssetInData(this, "back.jpg");
+    }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void setupActionBar() {
         // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
