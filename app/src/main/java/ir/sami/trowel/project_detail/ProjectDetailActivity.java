@@ -110,29 +110,33 @@ public class ProjectDetailActivity extends AppCompatActivity {
     }
 
     private void load3DModel() throws URISyntaxException {
-        File shipFile = new File(this.getDataDir(), "ship.obj");
-        File shipMtlFile = new File(this.getDataDir(), "ship.mtl");
-        File shipBmpFile = new File(this.getDataDir(), "ship.bmp");
-        File shipPngFile = new File(this.getDataDir(), "ship.png");
-
-        if (!shipFile.exists()) {
-            try {
-                shipFile.createNewFile();
-                shipMtlFile.createNewFile();
-                shipBmpFile.createNewFile();
-                shipPngFile.createNewFile();
-                Utils.copyStreamToFile(this.getAssets().open("ship.obj"), shipFile);
-                Utils.copyStreamToFile(this.getAssets().open("ship.mtl"), shipMtlFile);
-                Utils.copyStreamToFile(this.getAssets().open("ship.bmp"), shipBmpFile);
-                Utils.copyStreamToFile(this.getAssets().open("ship.png"), shipPngFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//        File shipFile = new File(this.getDataDir(), "ship.obj");
+//        File shipMtlFile = new File(this.getDataDir(), "ship.mtl");
+//        File shipBmpFile = new File(this.getDataDir(), "ship.bmp");
+//        File shipPngFile = new File(this.getDataDir(), "ship.png");
+//
+//        if (!shipFile.exists()) {
+//            try {
+//                shipFile.createNewFile();
+//                shipMtlFile.createNewFile();
+//                shipBmpFile.createNewFile();
+//                shipPngFile.createNewFile();
+//                Utils.copyStreamToFile(this.getAssets().open("ship.obj"), shipFile);
+//                Utils.copyStreamToFile(this.getAssets().open("ship.mtl"), shipMtlFile);
+//                Utils.copyStreamToFile(this.getAssets().open("ship.bmp"), shipBmpFile);
+//                Utils.copyStreamToFile(this.getAssets().open("ship.png"), shipPngFile);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        File modelFile = new File(Utils.getProjectRoot(this.projectName), "surface.obj");
+        if(!modelFile.exists()) {
+            Toast.makeText(this, "Modal has not build yet!", Toast.LENGTH_SHORT).show();
+            return;
         }
-
         Intent intent = new Intent(getApplicationContext(), ModelViewerActivity.class);
-        Uri modelUri = Uri.parse("android:///assets/ship.obj");
-        intent.putExtra("uri", URI.create("file:///data/data/ir.sami.trowel/ship.obj").toString());
+//        Uri modelUri = Uri.parse("android:///assets/ship.obj");
+        intent.putExtra("uri", URI.create("file://"+modelFile.getAbsolutePath()).toString());
         intent.putExtra("immersiveMode", "false");
         startActivity(intent);
     }

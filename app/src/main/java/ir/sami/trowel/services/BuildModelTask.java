@@ -91,7 +91,7 @@ public class BuildModelTask extends AsyncTask<String, Integer, String> {
             ListResult = imageList(images.getAbsolutePath(), sensorDatabase.getAbsolutePath(), matchesDir.getAbsolutePath(), Utils.getFocalLengthInPixels(cameraCharacteristics, config.getMaxImageDimension()) + "");
             if (failed(ListResult))
                 return "FAILED";
-            publishProgress(2);
+        publishProgress(2);
 
         }
 ////////////////////////////////////////
@@ -143,6 +143,7 @@ public class BuildModelTask extends AsyncTask<String, Integer, String> {
         if (failed(colorizeResult))
             return "FAILED";
         publishProgress(7);
+        publishProgress(8);
 
         return "SUCCESS";
     }
@@ -175,6 +176,9 @@ public class BuildModelTask extends AsyncTask<String, Integer, String> {
                 stage = "Colorizing Cloud";
                 break;
             case 7:
+                stage = "Reconstructing Surface";
+                break;
+            case 8:
                 stage = "Done!";
                 break;
         }
@@ -185,7 +189,7 @@ public class BuildModelTask extends AsyncTask<String, Integer, String> {
         Notification notification = new NotificationCompat.Builder(context, Constants.BUILD_NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(stage)
                 .setContentText(config.getProjectName())
-                .setProgress(7, values[0], false)
+                .setProgress(8, values[0], false)
                 .setSmallIcon(R.drawable.trowel_svgrepo_com)
                 .setContentIntent(pendingIntent)
                 .build();

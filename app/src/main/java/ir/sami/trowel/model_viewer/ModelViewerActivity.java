@@ -249,9 +249,9 @@ public class ModelViewerActivity extends AppCompatActivity implements EventListe
             case R.id.model_toggle_textures:
                 scene.toggleTextures();
                 break;
-            case R.id.model_toggle_animation:
-                scene.toggleAnimation();
-                break;
+//            case R.id.model_toggle_animation:
+//                scene.toggleAnimation();
+//                break;
             case R.id.model_toggle_smooth:
                 scene.toggleSmooth();
                 break;

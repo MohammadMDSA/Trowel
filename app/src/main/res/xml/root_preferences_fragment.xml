@@ -7,13 +7,14 @@
             android:max="5000"
             app:defaultValue="1000"
             app:key="image_max_dim"
-            app:min="300"
+            app:min="100"
             app:title="@string/build_config_setup_max_image_dimension"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/build_config_feature">
 
         <SwitchPreference
+            app:isPreferenceVisible="false"
             app:key="upright"
             app:title="@string/build_config_feature_upright" />
 

@@ -26,12 +26,12 @@
         android:orderInCategory="300"
         android:title="@string/toggle_textures"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/model_toggle_animation"
-        android:icon="@android:drawable/ic_menu_gallery"
-        android:orderInCategory="500"
-        android:title="@string/toggle_animation"
-        app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/model_toggle_animation"-->
+<!--        android:icon="@android:drawable/ic_menu_gallery"-->
+<!--        android:orderInCategory="500"-->
+<!--        android:title="@string/toggle_animation"-->
+<!--        app:showAsAction="ifRoom" />-->
     <item
         android:id="@+id/model_toggle_smooth"
         android:icon="@android:drawable/ic_menu_gallery"
